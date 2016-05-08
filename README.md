@@ -12,10 +12,12 @@
 [codecov]: https://codecov.io/gh/dtinth/circumstance/src/master/README.md
 [codecov-svg]: https://img.shields.io/codecov/c/github/dtinth/circumstance.svg
 
-_BDD for your pure functions (e.g. Redux reducers)._
+_Given-When-Then for your pure functions (e.g. Redux reducers)._
 
-__circumstance__ lets you write your state-updating functions (including Redux reducers)
-using Given-When-Then concept.
+__circumstance__ lets you test your state-updating functions (including Redux reducers)
+using the [Given-When-Then concept](http://martinfowler.com/bliki/GivenWhenThen.html).
+
+> Note: This library is [generated from README.md](https://github.com/dtinth/essay). That’s why you don’t see any JavaScript file in this repository. What you’re reading is the library’s source code and tests.
 
 ## Example 1: A state updating function
 
@@ -298,7 +300,7 @@ it('lets me assert the state directly', () =>
 
 ## More examples
 
-## Example 3: A Todos reducer
+### Example 3: A Todos reducer
 
 ```js
 // examples/reducers/todos.test.js
