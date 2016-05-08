@@ -1,16 +1,21 @@
 
-# circumstance
+# ![circumstance](http://i.imgur.com/W81SZzL.png)
+
+[![NPM version][npm-svg]][npm]
+[![Build status][travis-svg]][travis]
+[![Code coverage][codecov-svg]][codecov]
+
+[travis]: https://travis-ci.org/dtinth/circumstance
+[travis-svg]: https://img.shields.io/travis/dtinth/circumstance.svg?style=flat
+[npm]: https://www.npmjs.com/package/circumstance
+[npm-svg]: https://img.shields.io/npm/v/circumstance.svg?style=flat
+[codecov]: https://codecov.io/gh/dtinth/circumstance/src/master/README.md
+[codecov-svg]: https://img.shields.io/codecov/c/github/circumstance/essay.svg
 
 _BDD for your pure functions (e.g. Redux reducers)._
 
 __circumstance__ lets you write your state-updating functions (including Redux reducers)
 using Given-When-Then concept.
-
----
-
-![Concept](http://i.imgur.com/W81SZzL.png)
-
----
 
 ## Example 1: A state updating function
 
