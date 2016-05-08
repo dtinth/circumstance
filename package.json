@@ -21,6 +21,7 @@
   "author": "Thai Pangsakulyanont <org.yi.dttvb@gmail.com> (http://dt.in.th/)",
   "license": "MIT",
   "devDependencies": {
-    "essay": "^3.0.0"
+    "essay": "^3.0.0",
+    "lodash": "^4.11.2"
   }
 }

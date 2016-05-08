@@ -6,8 +6,11 @@ _BDD for your pure functions (e.g. Redux reducers)._
 __circumstance__ lets you write your state-updating functions (including Redux reducers)
 using Given-When-Then concept.
 
+---
+
 ![Concept](http://i.imgur.com/W81SZzL.png)
 
+---
 
 ## Example 1: A state updating function
 
@@ -33,13 +36,13 @@ it('should start with 0', () =>
 it('should allow entering digits', () =>
   given(initialState)
   .when(keyDigit(1))
-  .and(keyDigit(5))
+   .and(keyDigit(5))
   .then(textToDisplay, shouldEqual('15'))
 )
 
 it('should allow adding numbers', () =>
   given(initialState)
-  .and(keyDigit(9))
+   .and(keyDigit(9))
   .when(pressPlusButton)
   .then(textToDisplay, shouldEqual('9'))
   .when(keyDigit(3))
@@ -88,6 +91,7 @@ export function textToDisplay (state) {
 ## Example 2: A Redux reducer
 
 `circumstance` can easily be used with Redux reducers.
+It contains few extra utility functions for testing reducers.
 For example, here’s an example reducer:
 
 ```js
@@ -100,6 +104,8 @@ export default function counterReducer (state = 0, action) {
   return state
 }
 ```
+
+And here’s the corresponding test:
 
 ```js
 // example/reducers/counter.test.js
@@ -119,7 +125,7 @@ it('should increment', () =>
 it('should allow repeated increment', () =>
   given(initialState)
   .when(dispatch({ type: 'INCREMENT' }))
-  .and(dispatch({ type: 'INCREMENT' }))
+   .and(dispatch({ type: 'INCREMENT' }))
   .then(state, shouldEqual(2))
 )
 it('should decrement', () =>
@@ -138,7 +144,6 @@ This is the public API:
 // index.js
 export { given } from './given'
 export { shouldEqual } from './shouldEqual'
-export { stateShouldEqual } from './stateShouldEqual'
 export { withReducer } from './redux/withReducer'
 export { state } from './state'
 ```
@@ -206,8 +211,32 @@ export function then (state) {
 export default then
 ```
 
+```js
+// _then.test.js
+import { given } from '.'
+it('lets me assert the state directly', () =>
+  given('hello')
+  .when(state => state + '!')
+  .then(state => assert(state.length === 6))
+)
+it('lets me assert a projection of the state', () =>
+  given('hello')
+  .when(state => state + '!')
+  .then(state => state.length, length => assert(length === 6))
+)
 
-### withReducer (Redux)
+// Tip: Use functions to make your test look more natural!
+import { shouldEqual } from '.'
+import { property } from 'lodash'
+it('lets me assert multiple times', () =>
+  given({ x: 5, y: 20 })
+  .then(property('x'), shouldEqual(5))
+   .and(property('y'), shouldEqual(20))
+)
+```
+
+
+### `withReducer(reducer)` (Redux)
 
 Give it a reducer, it will return two things:
 
@@ -226,9 +255,9 @@ export default withReducer
 ```
 
 
-### shouldEqual
+### `shouldEqual(expectedValue)`
 
-A simple function that returns an assertion function, which checks if the state is equal to the expected state.
+A simple function that returns an assertion function which performs a deep comparison.
 
 ```js
 // shouldEqual.js
@@ -239,9 +268,9 @@ export function shouldEqual (expectedValue) {
 export default shouldEqual
 ```
 
-### state
+### `state(state)`
 
-An identity function...
+An identity function. For use with then.
 
 ```js
 // state.js
@@ -251,6 +280,15 @@ export function state (currentState) {
 export default state
 ```
 
+```js
+// state.test.js
+import { given, state, shouldEqual } from '.'
+it('lets me assert the state directly', () =>
+  given('hello')
+  .when(state => state.toUpperCase())
+  .then(state, shouldEqual('HELLO'))
+)
+```
 
 
 ## More examples
@@ -259,14 +297,14 @@ export default state
 
 ```js
 // examples/reducers/todos.test.js
-import { given, withReducer, stateShouldEqual } from '../..'
+import { given, withReducer, state, shouldEqual } from '../..'
 import todosReducer from './todos'
 import { ADD_TODO } from '../constants/ActionTypes'
 const { dispatch, initialState } = withReducer(todosReducer)
 
 it('should start with a default todo item', () =>
   given(initialState)
-  .then(stateShouldEqual([
+  .then(state, shouldEqual([
     {
       text: 'Use Redux',
       completed: false,
@@ -281,7 +319,7 @@ it('should handle ADD_TODO after empty state', () =>
     type: ADD_TODO,
     text: 'Run the tests'
   }))
-  .then(stateShouldEqual([
+  .then(state, shouldEqual([
     {
       text: 'Run the tests',
       completed: false,
@@ -302,7 +340,7 @@ it('should handle more ADD_TODO', () =>
     type: ADD_TODO,
     text: 'Run the tests'
   }))
-  .then(stateShouldEqual([
+  .then(state, shouldEqual([
     {
       text: 'Run the tests',
       completed: false,
