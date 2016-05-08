@@ -1,6 +1,6 @@
 {
   "name": "circumstance",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "BDD your pure functions (e.g. Redux reducers)",
   "main": "lib/index.js",
   "keywords": [
