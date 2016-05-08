@@ -1,0 +1,26 @@
+{
+  "name": "circumstance",
+  "version": "1.0.0",
+  "description": "BDD your pure functions (e.g. Redux reducers)",
+  "main": "lib/index.js",
+  "keywords": [
+    "tdd",
+    "bdd",
+    "test",
+    "testing",
+    "redux"
+  ],
+  "files": [
+    "lib",
+    "src"
+  ],
+  "scripts": {
+    "prepublish": "essay build",
+    "test": "essay test"
+  },
+  "author": "Thai Pangsakulyanont <org.yi.dttvb@gmail.com> (http://dt.in.th/)",
+  "license": "MIT",
+  "devDependencies": {
+    "essay": "^3.0.0"
+  }
+}
