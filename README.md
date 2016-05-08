@@ -22,7 +22,7 @@ using Given-When-Then concept.
 Here’s a calculator test. See how natural the test looks!
 
 ```js
-// example/state/Calculator.test.js
+// examples/state/Calculator.test.js
 import { given, shouldEqual } from '../..'
 
 import {
@@ -62,7 +62,7 @@ it('should allow adding numbers', () =>
 And here’s the calculator state module. See how all functions are pure (although the calculator is still very incomplete and buggy!)
 
 ```js
-// example/state/Calculator.js
+// examples/state/Calculator.js
 export const initialState = { current: null, operand: 0 }
 
 // Commands: they return functions that update states
@@ -100,7 +100,7 @@ It contains few extra utility functions for testing reducers.
 For example, here’s an example reducer:
 
 ```js
-// example/reducers/counter.js
+// examples/reducers/counter.js
 export default function counterReducer (state = 0, action) {
   switch (action.type) {
     case 'INCREMENT': return state + 1
@@ -113,7 +113,7 @@ export default function counterReducer (state = 0, action) {
 And here’s the corresponding test:
 
 ```js
-// example/reducers/counter.test.js
+// examples/reducers/counter.test.js
 import counterReducer from './counter'
 import { given, withReducer, state, shouldEqual } from '../..'
 const { dispatch, initialState } = withReducer(counterReducer)
