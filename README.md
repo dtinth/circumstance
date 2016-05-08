@@ -1,5 +1,5 @@
 
-# ![circumstance](http://i.imgur.com/W81SZzL.png)
+# ![circumstance](http://i.imgur.com/oD4C88O.png)
 
 [![NPM version][npm-svg]][npm]
 [![Build status][travis-svg]][travis]
@@ -10,7 +10,7 @@
 [npm]: https://www.npmjs.com/package/circumstance
 [npm-svg]: https://img.shields.io/npm/v/circumstance.svg?style=flat
 [codecov]: https://codecov.io/gh/dtinth/circumstance/src/master/README.md
-[codecov-svg]: https://img.shields.io/codecov/c/github/circumstance/essay.svg
+[codecov-svg]: https://img.shields.io/codecov/c/github/dtinth/circumstance.svg
 
 _BDD for your pure functions (e.g. Redux reducers)._
 
