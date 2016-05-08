@@ -5,3 +5,11 @@ before_script:
 - npm install -g codecov
 after_success:
 - codecov
+deploy:
+  provider: npm
+  email: org.yi.dttvb@gmail.com
+  api_key:
+    secure: B5wE1VxiIxmoQoC0ZX6ykhwzl80KRyHwxyMi9TBvfXFnPN9hGpCSrhROKkuXEAfFh/YG99a6ql8/peKxzAaYWUqCNWjYjTlTHKyEcGOJHDNh3e1CgAlg+3h4P2SRTIh8art7rEHklPbhoGUGzAFUFQrm8RhQd96wspakdphgHK1rFTjKPnUh9aREQyEoyxL/Ky5lwFZOSW9Gns4OpvovhoYo8t/nV3TaHO9KTRr2OqvbHMaHSz7LFlRhN9AgJBzfASEMOOPo8o/AqG9uUKYnSOlbFhIxP7JhJZID29miEcfjd7Go7S7steolvh2o/i18vRscjE04UT7G8rNWrPZqXmOn9rgl1v7OFAXpUr6cj69O4YpKB847LF1lSjjKBnBpkntm9HfULKHfklxjCArTJCJ8TVWM6UC+jsT1U3mQi4z4vR/hHDgHqFXXpJrBZbWvqeaKth2Pp9Zmc0rYxF6DguFKXqiNOeRZ+rqM8uc8XG/aY7PPUcICOiF+uJDJJJsAtYLto070RBV7u/vsjAIEJCRDEh35bNUY19aoR4gEIoj1FyGD3DgxYc1uP/vLtLDwLusfiOlysiHGQ8ujU5SLnGtAEl76UB+V9t87KxV0xFIVPTG+WFzl02etYVgk5tx9LIDFDiniGgLQll6whiXTEZoyK7ev/mTuwm928gXw04w=
+  on:
+    tags: true
+    repo: dtinth/circumstance
