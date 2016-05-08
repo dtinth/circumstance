@@ -245,7 +245,7 @@ it('lets me assert multiple times', () =>
 
 ### `withReducer(reducer)` (Redux)
 
-Give it a reducer, it will return two things:
+Give it a Redux-style reducer, it will return two things:
 
 - `initialState` The initial state of this reducer.
 - `dispatch` A function that takes an action object, and returns a function to update the state as if the reducer is called using this action.
@@ -264,7 +264,7 @@ export default withReducer
 
 ### `shouldEqual(expectedValue)`
 
-A simple function that returns an assertion function which performs a deep comparison.
+Give it an expected value, returns an assertion function that performs a deep comparison against the given value.
 
 ```js
 // shouldEqual.js
@@ -277,7 +277,7 @@ export default shouldEqual
 
 ### `state(state)`
 
-An identity function. For use with then.
+An identity function. For use with `.then()`. (See the test for example.)
 
 ```js
 // state.js
