@@ -172,7 +172,7 @@ export function given (state) {
   return {
     and: (fn) => given(fn(state)),
     when: (fn) => when(fn(state)),
-    then: (fn, assertion) => then(state)(fn, assertion)
+    then: (...pipeline) => then(state)(...pipeline)
   }
 }
 export default given
