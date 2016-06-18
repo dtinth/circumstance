@@ -184,7 +184,7 @@ export default given
 A When object represents a scenario during the time where actions are performed. It has two methods:
 
 - `and(fn)` Apply `fn` to the state, e.g. to perform more actions.
-- `then([fn,] assertion)` Performs an assertion by calling `assertion` with `fn(state)`. Returns a `Then` object.
+- `then(...fns, assertion)` Performs an assertion by calling `assertion` with `state` applied by `fns` successively from left to right. Returns a `Then` object.
 
 ```js
 // _when.js
@@ -192,7 +192,7 @@ import then from './_then'
 export function when (state) {
   return {
     and: (fn) => when(fn(state)),
-    then: (fn, assertion) => then(state)(fn, assertion)
+    then: (...pipeline) => then(state)(...pipeline)
   }
 }
 export default when
@@ -203,15 +203,15 @@ export default when
 
 A Then represents a scenario after the actions are performed.
 
-- `and([fn,] assertion)` Perform one more assertion. Returns a Then object.
+- `and(...fns, assertion)` Perform one more assertion. Returns a Then object.
 - `when(fn)` Perform one more action. Returns a When object.
 
 ```js
 // _then.js
 import when from './_when'
 export function then (state) {
-  return (fn, assertion) => (assertion ? assertion(fn(state)) : fn(state), {
-    and: (fn, assertion) => then(state)(fn, assertion),
+  return (...pipeline) => (pipeline.reduce((x, f) => f(x), state), {
+    and: (...nextPipeline) => then(state)(...nextPipeline),
     when: (g) => when(g(state))
   })
 }
