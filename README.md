@@ -162,7 +162,7 @@ Calling `given` with a `state` returns a `Given` object with these methods:
 
 - `and(fn)` Apply `fn` to the state, e.g. to set up the scenario. Returns a `Given` object.
 - `when(fn)` Apply `fn` to the state, e.g. to perform the action you intend to test. Returns a `When` object.
-- `then([fn,] assertion)` Performs an assertion by calling `assertion` with `fn(state)`. Returns a `Then` object. You can think of `fn` as a selector. You can omit it, and the `assertion` will be called with the state.
+- `then(...fn, assertion)` Performs an assertion by calling `assertion` with `state` applied through `fn` successively from left to right. Returns a `Then` object. You can think of each `fn` as a selector. You can omit it, and the `assertion` will be called with the state.
 
 ```js
 // given.js
