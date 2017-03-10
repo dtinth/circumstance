@@ -151,6 +151,7 @@ This is the public API:
 // index.js
 export { given } from './given'
 export { shouldEqual } from './shouldEqual'
+export { shouldContain } from './shouldContain'
 export { withReducer } from './redux/withReducer'
 export { state } from './state'
 ```
@@ -275,6 +276,22 @@ export function shouldEqual (expectedValue) {
 export default shouldEqual
 ```
 
+### `shouldContain(expectedValue)`
+Give it an expected value, returns function that perform comparison some keys of the given value.
+
+```js
+// shouldContain.js
+import { deepEqual as assertDeepEqual } from 'assert'
+import { keys, merge } from 'lodash'
+export function shouldContain (expectedValue) {
+  return actualValue => assertDeepEqual(
+    keys(expectedValue).map((key) => ({ [key]: actualValue[key] })).reduce(merge, {}),
+    expectedValue
+  )
+}
+export default shouldContain
+```
+
 ### `state(state)`
 
 An identity function. For use with `.then()`. (See the test for example.)
@@ -289,11 +306,17 @@ export default state
 
 ```js
 // state.test.js
-import { given, state, shouldEqual } from '.'
+import { given, state, shouldEqual, shouldContain } from '.'
 it('lets me assert the state directly', () =>
   given('hello')
   .when(state => state.toUpperCase())
   .then(state, shouldEqual('HELLO'))
+)
+
+it('lets me assert the state contains some keys and values', () =>
+  given({ x: 1, y: 2, z: 3 })
+  .when(state => ({ ...state, x: state.x + 10 }))
+  .then(state, shouldContain({ x: 11, z: 3 }))
 )
 ```
 
